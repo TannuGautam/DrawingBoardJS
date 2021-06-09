@@ -13,6 +13,7 @@
     <div class = "main-container">
         <div class ="tools">
             <button class = "save">Save</button>
+            <button class = "gallery"></button>
             <button class = "undo">Undo</button>
             <button class = "redo">Redo</button>
             <button class = "backgroundCol">Background</button>
@@ -40,6 +41,15 @@
             </button>
         </div>
     </div>
+    <script src="dbScript.js"></script>
     <script src="script.js"></script>
+    <script>
+        let galleryBtn = document.querySelector(".gallery");
+
+        galleryBtn.addEventListener("click", function()
+        {
+            location.assign("gallery.html");
+        });
+    </script>
 </body>
 </html>

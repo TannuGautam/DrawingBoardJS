@@ -104,6 +104,8 @@ function brushUp(e)
 
     canvas.style.cursor = "crosshair";
 
+    
+
 }
 
 clearCanvas.addEventListener("click", function()
@@ -139,6 +141,8 @@ eraseBtn.addEventListener("click", function()
 
     eraseBtn.style.border = "red";
 
+    tool.lineWidth = 30;
+
     penBtn.style.border = "none";
 
     
@@ -150,7 +154,14 @@ eraseBtn.addEventListener("click", function()
 
 })
 
-let 
+let saveBtn = document.querySelector(".save");
+
+saveBtn.addEventListener("click", function()
+{
+    tool.drawImage(canvas,0,0);
+
+    addMediaToGallery(canvas.toDataURL(), "img");
+})
 
 
 
