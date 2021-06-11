@@ -1,4 +1,11 @@
+//undo and redo on canvas
+let undoRedoTracker = [];
+
+let track = -1;
+
 let canvas = document.querySelector("canvas");
+
+// undoRedoTracker.push(canvas.toDataURL());
 
 let tool = canvas.getContext("2d");
 
@@ -16,9 +23,9 @@ let eraseBtn = document.querySelector(".eraser");
 
 let isErasePressed = false;
 
-canvas.width = window.innerWidth;
+canvas.width = Number(window.innerWidth);
 
-canvas.height = window.innerHeight;
+canvas.height = Number(window.innerHeight);
 
 let  x; 
 
@@ -63,6 +70,8 @@ function brushDraw(canvas,x,y)
 
         canvas.style.cursor = "crosshair";
     }
+
+    
 }
 
 
@@ -102,9 +111,15 @@ function brushUp(e)
 {
     isPressed = false;
 
-    canvas.style.cursor = "crosshair";
+    //canvas.style.cursor = "crosshair";
 
-    
+    //tool.closePath();
+    //undo n redo
+    undoRedoTracker.push(canvas.toDataURL());
+
+    track = undoRedoTracker.length - 1;
+
+    //historySave();
 
 }
 
@@ -154,6 +169,8 @@ eraseBtn.addEventListener("click", function()
 
 })
 
+//saving the drawn image into gallery
+
 let saveBtn = document.querySelector(".save");
 
 saveBtn.addEventListener("click", function()
@@ -164,4 +181,79 @@ saveBtn.addEventListener("click", function()
 })
 
 
+let undoBtn = document.querySelector(".undo");
 
+let redoBtn = document.querySelector(".redo");
+
+// function historySave()
+// {
+//     track++;
+
+//     while(undoRedoTracker.length > 10)
+//     {
+//         undoRedoTracker.shift();
+
+//         track--;
+//     }
+
+//     if(track !== 0 && track < undoRedoTracker.length)
+//     {
+//         undoRedoTracker.length = track;
+
+//         track++;
+//     }
+//     else
+//     {
+//         undoRedoTracker.length = track;
+//     }
+
+//     undoRedoTracker.push(canvas.toDataURL());
+// }
+
+undoBtn.addEventListener("click", (e) =>
+{
+    //canvas.addEventListener("mouseup",brushUp, false);
+
+    if(track >= 0) track--;
+    
+    console.log(track);
+
+    console.log(undoRedoTracker);
+
+    tool.clearRect(0,0,canvas.width,canvas.height)
+
+    let img = new Image();
+
+    img.src = undoRedoTracker[track];
+
+    img.onload = (e) =>
+    {
+        tool.drawImage(img, 0, 0,img.width,img.height);
+    }
+
+    
+})
+
+redoBtn.addEventListener("click", (e) =>
+{
+    //canvas.addEventListener("mouseup",brushUp, false);
+    
+    if(track < undoRedoTracker.length - 1) track++;
+
+    console.log(track);
+
+    console.log(undoRedoTracker);
+    
+
+    let img = new Image();
+
+    img.src = undoRedoTracker[track];
+
+    img.onload = (e) =>
+    {
+        tool.clearRect(0,0,canvas.width,canvas.height);
+
+        tool.drawImage(img, 0, 0,img.width,img.height);
+    }
+
+})
