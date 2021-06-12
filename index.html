@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Drawing Board</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -12,35 +14,38 @@
     <canvas class = "canvas"></canvas>
     <div class = "main-container">
         <div class ="tools">
-            <button class = "save">Save</button>
-            <button class = "gallery"></button>
-            <button class = "undo">Undo</button>
-            <button class = "redo">Redo</button>
-            <button class = "backgroundCol">Background</button>
-            <button class = "shapes">Shapes</button>
-            <button class = "download">Download</button>
-            <button class = "addImage">Add Image</button>
-            <button class = "addToDO">ToDO</button>
-        </div>
-        <div class = "menu-bar">
-            <div class ="color-bar penColors">
-                <div class = "colors red"></div>
-                <div class = "colors green"></div>
-                <div class = "colors black"></div>
-                <div class = "colors blue"></div>
-            </div>
-            <input class = "randomCol" type = "color"></input>
-            <button class = "clear"> Clear
+            <button class = "pen" class = "active" title = "Draw">
+                <i class="fas fa-pen icon"></i>
+            </button>
+            <button class = "eraser icon" title = "Eraser">
+                <i class="fas fa-eraser erase icon"></i>
+            </button>
+            <button class = "clear" title = "Clear the canvas"> Clear
                 <!-- <i class="fas fa-eraser erase"></i> -->
             </button>
-            <button type = "range" class = "pen">
-                <i class="icon"></i>
+        </div>
+        <div class ="color-bar penColors">
+            <button class = "colors red" title = "Red"></button>
+            <button class = "colors green" title = "Green"></button>
+            <button class = "colors black" title = "Black"></button>
+            <button class = "colors blue" title = "Blue"></button>
+        </div>
+        <input class = "randomCol" type = "color" title = "Select Random Color"></input>
+        <div class = "otherOperations">
+            <button class = "save" title = "Save" >
+                <i class="fas fa-save icon"></i>
             </button>
-            <button class = "eraser">
-                <i class="fas fa-eraser erase"></i>
+            <button class = "undo" title = "Undo" >
+                <i class="fas fa-undo icon"></i>
+            </button>  
+            <button class = "redo" title = "Redo">
+                <i class="fas fa-redo icon"></i>
             </button>
         </div>
     </div>
+    <button class = "gallery " title = "Gallery">
+        <i class="fas fa-images icon gallerycol"></i>
+    </button>
     <script src="dbScript.js"></script>
     <script src="script.js"></script>
     <script>

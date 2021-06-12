@@ -37,6 +37,13 @@ canvas.addEventListener("mousemove",brushMove, false);
 
 canvas.addEventListener("mouseup",brushUp, false);
 
+let background = new Image();
+
+background.onload = function()
+{
+    tool.drawImage(background,0,0);
+}
+
 // let myColor = color.value;
 // penBtn.style.border = "red";
 //color
@@ -44,9 +51,9 @@ for(let i = 0; i < colorArr.length; i++)
 {
     colorArr[i].addEventListener("click", function()
     {
-       color = colorArr[i].classList[1];
+    color = colorArr[i].classList[1];
 
-       tool.strokeStyle = color;
+    tool.strokeStyle = color;
     })
 }
 
@@ -69,6 +76,7 @@ function brushDraw(canvas,x,y)
         tool.stroke();
 
         canvas.style.cursor = "crosshair";
+
     }
 
     
@@ -92,6 +100,8 @@ function brushDown(e)
     tool.lineTo(x,y);
 
     tool.stroke();
+
+    tool.closePath();
 
 }
 
@@ -135,11 +145,13 @@ penBtn.addEventListener("click", function()
 
     tool.strokeStyle = penColor.value;
 
+    // tool.lineWidth = 10;
+
    // pen.style.cursor = "https://cliparting.com/wp-content/uploads/2017/03/Fountain-pen-clipart-kid.png";
 
-    penBtn.style.border = "red";
+    // penBtn.style.border = "red";
 
-    eraseBtn.style.border = "none";
+    // eraseBtn.style.border = "none";
 
     canvas.addEventListener("mousedown",brushDown, false);
 
@@ -147,20 +159,19 @@ penBtn.addEventListener("click", function()
 
     canvas.addEventListener("mouseup",brushUp, false);
 
+
 })
 
 eraseBtn.addEventListener("click", function()
 {
 
-    tool.strokeStyle = "white";
-
-    eraseBtn.style.border = "red";
-
-    tool.lineWidth = 30;
-
-    penBtn.style.border = "none";
-
     
+    tool.strokeStyle = 'white';
+
+    // eraseBtn.style.border = "red";
+    // penBtn.style.border = "none";
+    // tool.lineWidth = 10;
+
     canvas.addEventListener("mousedown",brushDown, false);
 
     canvas.addEventListener("mousemove",brushMove, false);
@@ -256,4 +267,24 @@ redoBtn.addEventListener("click", (e) =>
         tool.drawImage(img, 0, 0,img.width,img.height);
     }
 
+})
+
+//active buttons
+let buttons = document.querySelectorAll('button');
+
+buttons.forEach(button =>{
+    button.addEventListener('click',function()
+    {
+        buttons.forEach(btn => btn.classList.remove('active'));
+
+        this.classList.add('active');
+    })
+})
+
+let input = document.querySelector('input');
+
+input.addEventListener("click",function()
+{
+    this.classList.toggle('active');
+    
 })
