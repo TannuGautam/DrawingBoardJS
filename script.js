@@ -31,6 +31,10 @@ let  x;
 
 let  y;
 
+tool.fillStyle = "#ffffff";
+
+tool.fillRect(0, 0, canvas.width, canvas.height);
+
 canvas.addEventListener("mousedown",brushDown, false);
 
 canvas.addEventListener("mousemove",brushMove, false);
@@ -76,6 +80,8 @@ function brushDraw(canvas,x,y)
         tool.stroke();
 
         canvas.style.cursor = "crosshair";
+
+        
 
     }
 
@@ -186,6 +192,8 @@ let saveBtn = document.querySelector(".save");
 
 saveBtn.addEventListener("click", function()
 {
+    
+
     tool.drawImage(canvas,0,0);
 
     addMediaToGallery(canvas.toDataURL(), "img");
@@ -196,30 +204,6 @@ let undoBtn = document.querySelector(".undo");
 
 let redoBtn = document.querySelector(".redo");
 
-// function historySave()
-// {
-//     track++;
-
-//     while(undoRedoTracker.length > 10)
-//     {
-//         undoRedoTracker.shift();
-
-//         track--;
-//     }
-
-//     if(track !== 0 && track < undoRedoTracker.length)
-//     {
-//         undoRedoTracker.length = track;
-
-//         track++;
-//     }
-//     else
-//     {
-//         undoRedoTracker.length = track;
-//     }
-
-//     undoRedoTracker.push(canvas.toDataURL());
-// }
 
 undoBtn.addEventListener("click", (e) =>
 {
